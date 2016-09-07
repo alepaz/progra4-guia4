@@ -126,9 +126,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(500, 28);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 13);
+            this.label3.Size = new System.Drawing.Size(93, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Método de Inserción";
+            this.label3.Text = "Método QuickSort";
             // 
             // label4
             // 

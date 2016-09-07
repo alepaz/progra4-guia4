@@ -23,6 +23,9 @@ namespace Guia3_Pt132129
         int[] arreglo_numeros; //Definimos un arreglo de enteros, que contendra los datos a ordenar
         Button[] arreglo; //Definimos un arreglo de botones, que nos ayudara para la simulacion
         Numero Dato = new Numero();
+        bool bandera = false;
+        int primero;
+        int ultimo;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -36,8 +39,20 @@ namespace Guia3_Pt132129
                 int num = Convert.ToInt32(txtNumero.Text);
                 Dato.Insertar_Dato(num); //Se agrega al objeto "Datos"
                 arreglo_numeros = Dato.getArreglo();   //Se sacan los arreglos del objeto "Datos"
-
                 arreglo = Dato.Arreglo_Botones();
+
+                if (bandera) {
+                    ultimo = Convert.ToInt32(txtNumero.Text);
+                } else {
+                    primero = Convert.ToInt32(txtNumero.Text);
+                    bandera = true;
+                }
+                
+
+
+
+
+
 
             }
             catch
@@ -190,7 +205,7 @@ namespace Guia3_Pt132129
             btnAgregar.Enabled = false;
 
             //Llamamos al metodo
-            InsertionSort(ref arreglo_numeros, ref arreglo);
+            InsertionSort(ref arreglo_numeros, ref arreglo, primero, ultimo);
             this.Cursor = Cursors.Default;
 
             //Cambio de estado de controlles
@@ -201,25 +216,43 @@ namespace Guia3_Pt132129
 
         }
 
-        public void InsertionSort(ref int[] arreglo_Numeros, ref Button[] arreglo)
+        public void InsertionSort(ref int[] arreglo_Numeros, ref Button[] arreglo, int primero, int ultimo)
         {
             Stopwatch crono = new Stopwatch();
             crono.Start();
 
-            for (int i = 0; i < arreglo.Length; i++)
+            int i, j, central;
+            double pivote;
+            central = (primero + ultimo) / 2;
+            pivote = arreglo_Numeros[central];
+            i = primero;
+            j = ultimo;
+
+            do
             {
-                int temp = arreglo_Numeros[i];
-                int j = i - 1;
-                while ((j >= 0) && (arreglo_Numeros[j] > temp))
+                while (arreglo_Numeros[i] < pivote) i++;
+                while (arreglo_Numeros[j] > pivote) j--;
+
+                if (i <= j)
                 {
-
-                    arreglo_Numeros[j + 1] = arreglo_Numeros[j];
-                    Intercambio(ref arreglo, j + 1, j);
+                    int temp;
+                    temp = arreglo_Numeros[i];
+                    arreglo_Numeros[i] = arreglo_Numeros[j];
+                    arreglo_Numeros[j] = temp;
+                    Intercambio(ref arreglo, j, i);
+                    i++;
                     j--;
-
                 }
-                arreglo_Numeros[j + 1] = temp;
 
+            } while (i <= j);
+
+            if (primero < j)
+            {
+                InsertionSort(ref arreglo_Numeros, ref arreglo, primero, j);
+            }
+            if (i < ultimo)
+            {
+                InsertionSort(ref arreglo_Numeros, ref arreglo, i, ultimo);
             }
 
             crono.Stop();

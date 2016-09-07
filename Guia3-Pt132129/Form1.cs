@@ -23,9 +23,6 @@ namespace Guia3_Pt132129
         int[] arreglo_numeros; //Definimos un arreglo de enteros, que contendra los datos a ordenar
         Button[] arreglo; //Definimos un arreglo de botones, que nos ayudara para la simulacion
         Numero Dato = new Numero();
-        bool bandera = false;
-        int primero;
-        int ultimo;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -39,21 +36,7 @@ namespace Guia3_Pt132129
                 int num = Convert.ToInt32(txtNumero.Text);
                 Dato.Insertar_Dato(num); //Se agrega al objeto "Datos"
                 arreglo_numeros = Dato.getArreglo();   //Se sacan los arreglos del objeto "Datos"
-                arreglo = Dato.Arreglo_Botones();
-
-                if (bandera) {
-                    ultimo = Convert.ToInt32(txtNumero.Text);
-                } else {
-                    primero = Convert.ToInt32(txtNumero.Text);
-                    bandera = true;
-                }
-                
-
-
-
-
-
-
+                arreglo = Dato.Arreglo_Botones();           
             }
             catch
             {
@@ -261,43 +244,61 @@ namespace Guia3_Pt132129
 
         }
 
-        public void SelectionSort(ref int[] arreglo_Numeros, ref Button[] arreglo)
+        public void MergeSort(ref int[] arreglo_Numeros, ref Button[] arreglo, int startIndex, int endIndex)
         {
-            Stopwatch crono = new Stopwatch();
-            crono.Start();
+            int mid;
 
-            int temp = 0;
-            int pos_min;
-
-            for (int i = 0; i < arreglo.Length - 1; i++)
+            if (endIndex > startIndex)
             {
-                pos_min = i; //set pos_min to the current index of array
+                mid = (endIndex + startIndex) / 2;
+                MergeSort(ref arreglo_Numeros, ref arreglo, startIndex, mid);
+                MergeSort(ref arreglo_Numeros, ref arreglo, (mid + 1), endIndex);
+                Merge(arreglo_Numeros, startIndex, (mid + 1), endIndex);
+            }
+        }
 
-                for (int j = i + 1; j < arreglo.Length; j++)
+        public void Merge(int[] input, int left, int mid, int right)
+        {
+            //Merge procedure takes theta(n) time
+            int[] temp = new int[input.Length];
+            int i, leftEnd, lengthOfInput, tmpPos;
+            leftEnd = mid - 1;
+            tmpPos = left;
+            lengthOfInput = right - left + 1;
+
+            //selecting smaller element from left sorted array or right sorted array and placing them in temp array.
+            while ((left <= leftEnd) && (mid <= right))
+            {
+                if (input[left] <= input[mid])
                 {
-                    // We now use 'CompareTo' instead of '<'
-                    if (arreglo_Numeros[j].CompareTo(arreglo_Numeros[pos_min]) < 0)
-                    {
-                        //pos_min will keep track of the index that min is in, this is needed when a swap happens
-                        pos_min = j;
-                    }
+                    temp[tmpPos++] = input[left++];
                 }
-
-                //if pos_min no longer equals i than a smaller value must have been found, so a swap must occur
-                if (pos_min != i)
+                else
                 {
-                    temp = arreglo_Numeros[i];
-
-                    arreglo_Numeros[i] = arreglo_Numeros[pos_min];
-
-                    arreglo_Numeros[pos_min] = temp;
-
-                    Intercambio(ref arreglo, pos_min, i);
+                    temp[tmpPos++] = input[mid++];
                 }
             }
+            //placing remaining element in temp from left sorted array
+            while (left <= leftEnd)
+            {
+                temp[tmpPos++] = input[left++];
+            }
 
-            crono.Stop();
-            MessageBox.Show("El ordenamiento ha tardado: " + Convert.ToString(crono.Elapsed.Milliseconds) + " milisegundos");
+            //placing remaining element in temp from right sorted array
+            while (mid <= right)
+            {
+                temp[tmpPos++] = input[mid++];
+            }
+
+            //placing temp array to input
+            for (i = 0; i < lengthOfInput; i++)
+            {
+                //Intercambio(ref arreglo, right, i);
+                input[right] = temp[right];
+                right--;
+            }
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -309,9 +310,14 @@ namespace Guia3_Pt132129
             txtNumero.Enabled = false;
             btnAgregar.Enabled = false;
 
+            Stopwatch crono = new Stopwatch();
+            crono.Start();
             //Llamamos al metodo
-            SelectionSort(ref arreglo_numeros, ref arreglo);
+            MergeSort(ref arreglo_numeros, ref arreglo, 0, arreglo_numeros.Length - 1);
             this.Cursor = Cursors.Default;
+
+            crono.Stop();
+            MessageBox.Show("El ordenamiento ha tardado: " + Convert.ToString(crono.Elapsed.Milliseconds) + " milisegundos");
 
             //Cambio de estado de controlles
             btnOrdenar.Enabled = true;

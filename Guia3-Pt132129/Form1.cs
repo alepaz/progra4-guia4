@@ -319,11 +319,35 @@ namespace Guia3_Pt132129
             crono.Stop();
             MessageBox.Show("El ordenamiento ha tardado: " + Convert.ToString(crono.Elapsed.Milliseconds) + " milisegundos");
 
+            redibujar(ref arreglo_numeros);
+
+            estado = true; //Cambiamos el valor de la variable de control para la simulacion
+            tabPage1.Refresh();
+            txtNumero.Text = "";
+            txtNumero.Focus();
+
             //Cambio de estado de controlles
             btnOrdenar.Enabled = true;
             txtNumero.Enabled = true;
             btnAgregar.Enabled = true;
             txtNumero.Focus();
+        }
+
+        public void redibujar(ref int[] arreglo_numeros)
+        {
+            int i = 0;
+            int cont = arreglo_numeros.Length;
+            
+            for (i = 1; i < cont; i++)
+            {
+                MessageBox.Show(arreglo_numeros[i].ToString());
+                Dato.Insertar_Dato(arreglo_numeros[i]); //Se agrega al objeto "Datos"
+                arreglo_numeros = Dato.getArreglo();   //Se sacan los arreglos del objeto "Datos"
+                arreglo = Dato.Arreglo_Botones();    
+                
+            }
+
+            //MessageBox.Show("sali");
         }
 
 

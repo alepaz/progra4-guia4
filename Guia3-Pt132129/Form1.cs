@@ -133,7 +133,7 @@ namespace Guia3_Pt132129
             {
                 Arreglo[i].Location = xy;
                 t.Controls.Add(Arreglo[i]);
-                xy += new Size(70, 0);
+                xy += new Size(60, 0);
             }
         }
 
@@ -161,7 +161,7 @@ namespace Guia3_Pt132129
             int diferencia = pa.X - pb.X;
             int x = 10;
             int y = 10;
-            int t = 50;
+            int t = 10;
 
             while (y != 70)
             {
@@ -204,9 +204,15 @@ namespace Guia3_Pt132129
             txtNumero.Enabled = false;
             btnAgregar.Enabled = false;
 
+            Stopwatch crono = new Stopwatch();
+            crono.Start();
+
             //Llamamos al metodo
-            InsertionSort(ref arreglo_numeros, ref arreglo, primero, ultimo);
+            QuickSort(ref arreglo_numeros, ref arreglo, 0, arreglo_numeros.Length - 1);
             this.Cursor = Cursors.Default;
+
+            crono.Stop();
+            MessageBox.Show("El ordenamiento ha tardado: " + Convert.ToString(crono.Elapsed.Milliseconds) + " milisegundos");
 
             //Cambio de estado de controlles
             btnOrdenar.Enabled = true;
@@ -216,10 +222,8 @@ namespace Guia3_Pt132129
 
         }
 
-        public void InsertionSort(ref int[] arreglo_Numeros, ref Button[] arreglo, int primero, int ultimo)
+        public void QuickSort(ref int[] arreglo_Numeros, ref Button[] arreglo, int primero, int ultimo)
         {
-            Stopwatch crono = new Stopwatch();
-            crono.Start();
 
             int i, j, central;
             double pivote;
@@ -248,15 +252,13 @@ namespace Guia3_Pt132129
 
             if (primero < j)
             {
-                InsertionSort(ref arreglo_Numeros, ref arreglo, primero, j);
+                QuickSort(ref arreglo_Numeros, ref arreglo, primero, j);
             }
             if (i < ultimo)
             {
-                InsertionSort(ref arreglo_Numeros, ref arreglo, i, ultimo);
+                QuickSort(ref arreglo_Numeros, ref arreglo, i, ultimo);
             }
 
-            crono.Stop();
-            MessageBox.Show("El ordenamiento ha tardado: " + Convert.ToString(crono.Elapsed.Milliseconds) + " milisegundos");
         }
 
         public void SelectionSort(ref int[] arreglo_Numeros, ref Button[] arreglo)
@@ -293,8 +295,6 @@ namespace Guia3_Pt132129
                     Intercambio(ref arreglo, pos_min, i);
                 }
             }
-
-            
 
             crono.Stop();
             MessageBox.Show("El ordenamiento ha tardado: " + Convert.ToString(crono.Elapsed.Milliseconds) + " milisegundos");

@@ -95,7 +95,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 98);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(704, 243);
+            this.tabControl1.Size = new System.Drawing.Size(704, 292);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
@@ -104,7 +104,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(696, 217);
+            this.tabPage1.Size = new System.Drawing.Size(696, 266);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Ver Simulación";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -113,7 +113,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.button1.Location = new System.Drawing.Point(503, 53);
+            this.button1.Location = new System.Drawing.Point(506, 53);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(85, 31);
             this.button1.TabIndex = 7;
@@ -124,7 +124,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(500, 28);
+            this.label3.Location = new System.Drawing.Point(503, 28);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(93, 13);
             this.label3.TabIndex = 8;
@@ -133,16 +133,16 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(610, 28);
+            this.label4.Location = new System.Drawing.Point(609, 28);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 13);
+            this.label4.Size = new System.Drawing.Size(95, 13);
             this.label4.TabIndex = 9;
-            this.label4.Text = "Método de Selección";
+            this.label4.Text = "Método MergeSort";
             // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.button2.Location = new System.Drawing.Point(613, 53);
+            this.button2.Location = new System.Drawing.Point(612, 53);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(85, 31);
             this.button2.TabIndex = 10;
@@ -155,7 +155,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(728, 353);
+            this.ClientSize = new System.Drawing.Size(728, 402);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);

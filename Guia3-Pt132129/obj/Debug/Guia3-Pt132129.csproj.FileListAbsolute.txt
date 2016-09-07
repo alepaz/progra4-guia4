@@ -27,3 +27,12 @@ C:\Users\Usuario\Desktop\Guia4\progra4-guia4\Guia3-Pt132129\bin\Debug\Guia4-Pt13
 C:\Users\Usuario\Desktop\Guia4\progra4-guia4\Guia3-Pt132129\obj\Debug\Guia4-Pt132129.exe
 C:\Users\Usuario\Desktop\Guia4\progra4-guia4\Guia3-Pt132129\obj\Debug\Guia4-Pt132129.pdb
 C:\Users\Usuario\Desktop\Guia4\progra4-guia4\Guia3-Pt132129\obj\Debug\Guia3-Pt132129.csprojResolveAssemblyReference.cache
+C:\Users\usuario\progra4-guia4\Guia3-Pt132129\bin\Debug\Guia4-Pt132129.exe.config
+C:\Users\usuario\progra4-guia4\Guia3-Pt132129\obj\Debug\Guia4-Pt132129.exe
+C:\Users\usuario\progra4-guia4\Guia3-Pt132129\obj\Debug\Guia4-Pt132129.pdb
+C:\Users\usuario\progra4-guia4\Guia3-Pt132129\bin\Debug\Guia4-Pt132129.exe
+C:\Users\usuario\progra4-guia4\Guia3-Pt132129\bin\Debug\Guia4-Pt132129.pdb
+C:\Users\usuario\progra4-guia4\Guia3-Pt132129\obj\Debug\Guia3-Pt132129.csprojResolveAssemblyReference.cache
+C:\Users\usuario\progra4-guia4\Guia3-Pt132129\obj\Debug\Guia3_Pt132129.Form1.resources
+C:\Users\usuario\progra4-guia4\Guia3-Pt132129\obj\Debug\Guia4_Pt132129.Properties.Resources.resources
+C:\Users\usuario\progra4-guia4\Guia3-Pt132129\obj\Debug\Guia3-Pt132129.csproj.GenerateResource.Cache

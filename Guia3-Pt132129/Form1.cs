@@ -20,9 +20,11 @@ namespace Guia3_Pt132129
         }
         
         private bool estado = false; //Nos servirá como variable de control para saber el estado de la simulación
-        int[] arreglo_numeros; //Definimos un arreglo de enteros, que contendra los datos a ordenar
+        string[] arreglo_numeros; //Definimos un arreglo de enteros, que contendra los datos a ordenar
         Button[] arreglo; //Definimos un arreglo de botones, que nos ayudara para la simulacion
         Numero Dato = new Numero();
+        bool flag = false;
+        bool wasNumber = false;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -33,15 +35,65 @@ namespace Guia3_Pt132129
         {
             try {
 
-                int num = Convert.ToInt32(txtNumero.Text);
-                Dato.Insertar_Dato(num); //Se agrega al objeto "Datos"
-                arreglo_numeros = Dato.getArreglo();   //Se sacan los arreglos del objeto "Datos"
-                arreglo = Dato.Arreglo_Botones();           
+                if (radioButton1.Checked) {
+
+                    //string num = Convert.ToInt32(txtNumero.Text);
+                    string num = txtNumero.Text;
+                    int i = 0;
+                    //verificamos si fue numero
+                    if (int.TryParse(num.ToString(), out i))
+                    {
+                        wasNumber = true;
+                        Dato.Insertar_Dato(num); //Se agrega al objeto "Datos"
+                        arreglo_numeros = Dato.getArreglo();   //Se sacan los arreglos del objeto "Datos"
+                        arreglo = Dato.Arreglo_Botones();
+                        
+                        //bandera para deshabilitar radiobutton
+                        flag = true;
+                    }
+                    else {
+                        MessageBox.Show("No era un numero");
+                    }
+
+
+
+                }
+                else if (radioButton2.Checked)
+                {
+                    //string num = Convert.ToInt32(txtNumero.Text);
+                    string num = txtNumero.Text;
+                    int i = 0;
+                    //verificamos si fue numero
+                    if (!int.TryParse(num.ToString(), out i) && num.ToString() != "" && num.Length<2)
+                    {
+                        wasNumber = true;
+                        Dato.Insertar_Dato(num); //Se agrega al objeto "Datos"
+                        arreglo_numeros = Dato.getArreglo();   //Se sacan los arreglos del objeto "Datos"
+                        arreglo = Dato.Arreglo_Botones();
+
+                        //bandera para deshabilitar radiobutton
+                        flag = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No era caracter");
+                    }
+                
+                }
+
+                          
             }
             catch
             {
                 MessageBox.Show("Solo se admiten numeros enteros");
 
+            }
+
+            //Deshabilitar radiobutton
+            if (flag) {
+                radioButton1.Enabled = false;
+                radioButton2.Enabled = false;
+                
             }
 
             estado = true; //Cambiamos el valor de la variable de control para la simulacion
@@ -53,7 +105,7 @@ namespace Guia3_Pt132129
 
 
 
-        public void ShellSort(ref int[] arreglo, ref Button[] Arreglo_Numeros) {
+        public void ShellSort(ref string[] arreglo, ref Button[] Arreglo_Numeros) {
            
             Stopwatch crono = new Stopwatch();
             crono.Start();
@@ -68,11 +120,11 @@ namespace Guia3_Pt132129
                 for (int i = inc; i < arreglo.Length; i++)
                 {
 
-                    int v = arreglo[i];
+                    string v = arreglo[i];
 
                     j = i - inc;
 
-                    while (j >= 0 && arreglo[j] > v)
+                    while (j >= 0 && arreglo[j].CompareTo(v) >0)
                     {
 
                         arreglo[j + inc] = arreglo[j];
@@ -205,11 +257,11 @@ namespace Guia3_Pt132129
 
         }
 
-        public void QuickSort(ref int[] arreglo_Numeros, ref Button[] arreglo, int primero, int ultimo)
+        public void QuickSort(ref string[] arreglo_Numeros, ref Button[] arreglo, int primero, int ultimo)
         {
 
             int i, j, central;
-            double pivote;
+            string pivote;
             central = (primero + ultimo) / 2;
             pivote = arreglo_Numeros[central];
             i = primero;
@@ -217,12 +269,12 @@ namespace Guia3_Pt132129
 
             do
             {
-                while (arreglo_Numeros[i] < pivote) i++;
-                while (arreglo_Numeros[j] > pivote) j--;
+                while (arreglo_Numeros[i].CompareTo(pivote) < 0) i++;
+                while (arreglo_Numeros[j].CompareTo(pivote) > 0) j--;
 
                 if (i <= j)
                 {
-                    int temp;
+                    string temp;
                     temp = arreglo_Numeros[i];
                     arreglo_Numeros[i] = arreglo_Numeros[j];
                     arreglo_Numeros[j] = temp;
@@ -244,7 +296,7 @@ namespace Guia3_Pt132129
 
         }
 
-        public void MergeSort(ref int[] arreglo_Numeros, ref Button[] arreglo, int startIndex, int endIndex)
+        public void MergeSort(ref string[] arreglo_Numeros, ref Button[] arreglo, int startIndex, int endIndex)
         {
             int mid;
 
@@ -257,10 +309,10 @@ namespace Guia3_Pt132129
             }
         }
 
-        public void Merge(int[] input, int left, int mid, int right)
+        public void Merge(string[] input, int left, int mid, int right)
         {
             //Merge procedure takes theta(n) time
-            int[] temp = new int[input.Length];
+            string[] temp = new string[input.Length];
             int i, leftEnd, lengthOfInput, tmpPos;
             leftEnd = mid - 1;
             tmpPos = left;
@@ -269,7 +321,7 @@ namespace Guia3_Pt132129
             //selecting smaller element from left sorted array or right sorted array and placing them in temp array.
             while ((left <= leftEnd) && (mid <= right))
             {
-                if (input[left] <= input[mid])
+                if (input[left].CompareTo(input[mid]) <= 0)
                 {
                     temp[tmpPos++] = input[left++];
                 }
@@ -333,21 +385,23 @@ namespace Guia3_Pt132129
             txtNumero.Focus();
         }
 
-        public void redibujar(ref int[] arreglo_numeros)
+        public void redibujar(ref string[] arreglo_numeros)
         {
             int i = 0;
             int cont = arreglo_numeros.Length;
-            
+
             for (i = 1; i < cont; i++)
             {
+                arreglo[i].Text = arreglo_numeros[i].ToString();
                 MessageBox.Show(arreglo_numeros[i].ToString());
-                Dato.Insertar_Dato(arreglo_numeros[i]); //Se agrega al objeto "Datos"
-                arreglo_numeros = Dato.getArreglo();   //Se sacan los arreglos del objeto "Datos"
-                arreglo = Dato.Arreglo_Botones();    
-                
             }
 
             //MessageBox.Show("sali");
+        }
+
+        private void txtNumero_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
 

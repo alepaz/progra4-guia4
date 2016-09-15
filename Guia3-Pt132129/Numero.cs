@@ -13,12 +13,12 @@ namespace Guia3_Pt132129
     class Numero
     {
         private int longitud;   //Cantidad de datos a ordenar
-        private int[] arreglo = new int[1];
+        private string[] arreglo = new string[1];
         private Button[] arreglo_botones = new Button[1]; //Definimos un nuevo arreglo de botones
 
         public Numero() { //Constructor de la clase
 
-            int a = 0;      //Variable auxiliar
+            string a = "";      //Variable auxiliar
             arreglo[0] = a; //El texto que desplegara el boton
             arreglo_botones[0] = new Button();
             arreglo_botones[0].Width = 40;      //Definimos el ancho del boton
@@ -39,15 +39,15 @@ namespace Guia3_Pt132129
             return longitud;
         }
 
-        public int[] getArreglo() {
+        public string[] getArreglo() {
 
             return arreglo;
         }
 
-        public void Insertar_Dato(int dato) { //Esta funcion la utilizaremos para insertar el 
+        public void Insertar_Dato(string dato) { //Esta funcion la utilizaremos para insertar el 
                                               //Valor digitado por el usuario como texto en el boton
 
-            Array.Resize<int>(ref arreglo, longitud + 1);
+            Array.Resize<string>(ref arreglo, longitud + 1);
             arreglo[longitud] = dato;
             Array.Resize<Button>(ref arreglo_botones, longitud + 1);
             arreglo[longitud] = dato;
